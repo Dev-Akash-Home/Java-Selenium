@@ -20,19 +20,19 @@ public class DataDrivenDemo {
 	    
 	   // driver.manage().window().maximize();
 	    
-	    String filepath = System.getProperty("user.dir")+"\\TestData\\Interest.xlsx";
+	    String filepath = System.getProperty("user.dir")+"\\TestData\\interest.xlsx";
 	    
-	    int rows = UtilityPage.getRowCount(filepath, "sheet1");
+	    int rows = UtilityPage.getRowCount(filepath, "Sheet1");
 	   
 	    for (int i=1;i<=rows;i++) {
 		   
 		   // Read data from Excel
-		   String principle = UtilityPage.getCellData(filepath, "sheet1", i, 0);
-		   String rateOfInterest = UtilityPage.getCellData(filepath, "sheet1", i, 1);
-		   String period1 = UtilityPage.getCellData(filepath, "sheet1", i, 2);
-		   String period2 = UtilityPage.getCellData(filepath, "sheet1", i, 3);
-		   String frequency = UtilityPage.getCellData(filepath, "sheet1", i, 4);
-		   String maturity = UtilityPage.getCellData(filepath, "sheet1", i, 5);
+		   String principle = UtilityPage.getCellData(filepath, "Sheet1", i, 0);
+		   String rateOfInterest = UtilityPage.getCellData(filepath, "Sheet1", i, 1);
+		   String period1 = UtilityPage.getCellData(filepath, "Sheet1", i, 2);
+		   String period2 = UtilityPage.getCellData(filepath, "Sheet1", i, 3);
+		   String frequency = UtilityPage.getCellData(filepath, "Sheet1", i, 4);
+		   String maturity = UtilityPage.getCellData(filepath, "Sheet1", i, 5);
 		   
 		   // Pass the above data in the application
 		   driver.findElement(By.xpath("//input[@id='principal']")).sendKeys(principle);
@@ -55,13 +55,15 @@ public class DataDrivenDemo {
 		   
 		   if(Double.parseDouble(maturity)==Double.parseDouble(act_mvalue)) {
 			   System.out.println("Test Passed....");
-			   UtilityPage.setCellData(filepath, "sheet1", i, 7, "Passed");
-			   UtilityPage.fillGreenColour(filepath, "sheet1", i, 7);  
+			   System.out.println("Maturity value : "+ maturity +": matching with : "+ "the Actual Maturity value : " +act_mvalue);
+			   UtilityPage.setCellData(filepath, "Sheet1", i, 7, "Passed");
+			   UtilityPage.fillGreenColour(filepath, "Sheet1", i, 7);  
 		   }
 		   else {
 			   System.out.println("Test failed....");
-			   UtilityPage.setCellData(filepath, "sheet1", i, 7, "Failed");
-			   UtilityPage.fillRedColour(filepath, "sheet1", i, 7); 
+			   System.out.println("Maturity value : "+ maturity +": not matching with : "+ "the Actual Maturity value : " +act_mvalue);
+			   UtilityPage.setCellData(filepath, "Sheet1", i, 7, "Failed");
+			   UtilityPage.fillRedColour(filepath, "Sheet1", i, 7); 
 		   }
 		   
 		   Thread.sleep(2000);

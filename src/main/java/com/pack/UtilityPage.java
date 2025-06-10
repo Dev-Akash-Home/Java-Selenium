@@ -77,25 +77,26 @@ public class UtilityPage {
 	
 	public static void setCellData(String XlFilePath, String XlSheetName, int rownum, int colnum, String data) throws IOException 
 	{
-		// Read the data
-	    fi = new FileInputStream(XlFilePath);	
-	    wb = new XSSFWorkbook(fi);
-	    sh = wb.getSheet(XlSheetName);
-	    row = sh.getRow(rownum);
-	    
-	    // And then write the data
-	    cell = row.createCell(colnum);
-	    cell.setCellValue(data);
-	    fo = new FileOutputStream(XlSheetName); 
-	    wb.write(fo);
-	    
-	    wb.close();
-	    fi.close();
-		fo.close();	
+		// Read data from Excel
+		fi = new FileInputStream(XlFilePath);
+		wb = new XSSFWorkbook(fi);
+		sh = wb.getSheet(XlSheetName);
+		row = sh.getRow(rownum);
+		
+		// Write data from Excel
+		cell = row.createCell(colnum);
+		cell.setCellValue(data);
+		fo = new FileOutputStream(XlSheetName);
+		wb.write(fo);
+		
+		wb.close();
+		fi.close();
+		fo.close();
 	}
 	
 	public static void fillGreenColour(String XlFilePath, String XlSheetName, int rownum, int colnum) throws IOException 
 	{
+		try {
 	    fi = new FileInputStream(XlFilePath);	
 	    wb = new XSSFWorkbook(fi);
 	    sh = wb.getSheet(XlSheetName);
@@ -116,10 +117,15 @@ public class UtilityPage {
 	    wb.close();
 	    fi.close();
 		fo.close();	
+		}
+		catch(Exception e) {
+			//System.out.println("Style is not applied for some reason");
+		}
 	}
 	
 	public static void fillRedColour(String XlFilePath, String XlSheetName, int rownum, int colnum) throws IOException 
 	{
+		try {
 	    fi = new FileInputStream(XlFilePath);	
 	    wb = new XSSFWorkbook(fi);
 	    sh = wb.getSheet(XlSheetName);
@@ -140,5 +146,9 @@ public class UtilityPage {
 	    wb.close();
 	    fi.close();
 		fo.close();	
+		}
+		catch(Exception e) {
+			//System.out.println("Style is not applied for some reason");
+		}
 	}
-}
+  }
